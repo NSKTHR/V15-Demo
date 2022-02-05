@@ -54,9 +54,12 @@
                 <field name="price_subtotal" widget="monetary" optional="show" />
                 <field name="currency_id" invisible="1" />
                 <field name="date_planned" optional="show" />
-                <field name="qty_unreceived_filter" />
-                <field name="qty_unbilled_filter" />
-                <field name="bills_remaining_filter" />
+                <field name="qty_unreceived" />
+                <field name="qty_unbilled" />
+                <field name="bills_remaining" />
+                <field name="qty_unreceived_filter" invisible="1"/>
+                <field name="qty_unbilled_filter" invisible="1"/>
+                <field name="bills_remaining_filter" invisible="1"/>
             </tree>
         </field>
     </record>
