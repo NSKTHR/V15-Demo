@@ -45,18 +45,19 @@
                 <field name="order_id" string="Order" optional="show" />
                 <field name="partner_id" optional="show" />
                 <field name="product_id" optional="show" />
+                <field name="categ_id" />
                 <field name="image" widget="image" class="oe_avatar d-flex align-items-center pl-0 px-3" options="{'size': [30, 30]}" />
                 <field name="name" optional="show" />
                 <field name="product_uom" optional="show" />
                 <field name="product_uom_qty" string="Ordered Qty" optional="show" />
                 <field name="price_unit" optional="show" />
                 <field name="taxes_id" widget="many2many_tags" optional="show" />
-                <field name="price_subtotal" widget="monetary" optional="show" />
+                <field name="price_subtotal" widget="monetary" optional="show" sum='Total'/>
                 <field name="currency_id" invisible="1" />
                 <field name="date_planned" optional="show" />
-                <field name="qty_unreceived" />
-                <field name="qty_unbilled" />
-                <field name="bills_remaining" />
+                <field name="qty_unreceived" sum='Total'/>
+                <field name="qty_unbilled" sum='Total'/>
+                <field name="bills_remaining" sum='Total'/>
                 <field name="qty_unreceived_filter" invisible="1"/>
                 <field name="qty_unbilled_filter" invisible="1"/>
                 <field name="bills_remaining_filter" invisible="1"/>
@@ -123,6 +124,7 @@
                     <filter name="group_by_partner_id" domain="[]" string="Vendor" context="{'group_by':'partner_id'}" />
                     <filter name="group_by_order_id" domain="[]" string="Order" context="{'group_by':'order_id'}" />
                     <filter name="group_by_product_id" domain="[]" string="Product" context="{'group_by':'product_id'}" />
+                    <filter name="group_by_categ_id" domain="[]" string="Product Category" context="{'group_by':'categ_id'}" />
                 </group>
             </search>
         </field>

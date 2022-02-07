@@ -11,12 +11,13 @@ class PurchaseOrderLine(models.Model):
     qty_unreceived = fields.Float(string="Unreceived Quantity", compute='_compute_qty_bill')
     qty_unbilled = fields.Float(string="Unbilled Quantity", compute='_compute_qty_bill')
     bills_remaining = fields.Float(string="Forecasted Bills", compute='_compute_qty_bill')
+    categ_id = fields.Many2one('product.category', string="Product Category")
     
     qty_unreceived_filter = fields.Float(string="Unreceived Qty")
     qty_unbilled_filter = fields.Float(string="Unbilled Qty")
     bills_remaining_filter = fields.Float(string="Forecasted Bill")
     
-    @api.onchange('qty_received','qty_invoiced','product_qty')
+    @api.depends('qty_received','qty_invoiced','product_qty','product_id','categ_id')
     def _compute_qty_bill(self):
         """Compute the unreceived qty,unbilled qty and remaining bills forcasted"""
         for record in self:
@@ -28,6 +29,7 @@ class PurchaseOrderLine(models.Model):
                 record.qty_unreceived_filter = record.qty_unreceived
                 record.qty_unbilled_filter = record.qty_unbilled
                 record.bills_remaining_filter = record.bills_remaining
+                record.categ_id = record.product_id.categ_id
                 
             else:
                 record.qty_unreceived=0
@@ -37,6 +39,7 @@ class PurchaseOrderLine(models.Model):
                 record.qty_unreceived_filter = record.qty_unreceived
                 record.qty_unbilled_filter = record.qty_unbilled
                 record.bills_remaining_filter = record.bills_remaining
+                record.categ_id = record.product_id.categ_id
                 
             
 
